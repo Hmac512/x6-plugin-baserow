@@ -1,77 +1,42 @@
 <template>
-  <div className="content">
-    <div id="stencil" className="sidebar" />
-    <div className="panel">
-      <!-- <div className="toolbar">Toolbar</div> -->
-      <div id="container" className="x6-graph" />
-    </div>
+  <div>
+    <link href="http://localhost:3003/css/app.91d11c53.css" as="style" />
+    <link href="http://localhost:3003/js/app.8826a26e.js" as="script" />
+    <link
+      href="http://localhost:3003/js/chunk-vendors.e883f397.js"
+      as="script"
+    />
+    <link href="http://localhost:3003/css/app.91d11c53.css" rel="stylesheet" />
+    <div id="app"></div>
+    <script src="http://localhost:3003/js/chunk-vendors.e883f397.js"></script>
+    <script src="http://localhost:3003/js/app.8826a26e.js"></script>
   </div>
 </template>
 
 <script>
-import FlowGraph from './graph/index'
-
-const resizeFn = () => {
-  const width = document.body.offsetWidth - 291
-  // const height = document.body.offsetHeight - 40
-  const height = document.body.offsetHeight
-  FlowGraph.graph.resize(width, height)
-}
-
 export default {
-  name: 'App',
-  data() {
-    return {
-      ModalText: 'Content of the modal',
-      visible: true,
-      confirmLoading: false,
-    }
-  },
-  mounted() {
-    FlowGraph.init()
-    resizeFn()
-    window.addEventListener('resize', resizeFn)
-  },
-  unmounted() {
-    window.removeEventListener('resize', resizeFn)
-  },
-  methods: {
-    showModal() {
-      this.visible = true
+  name: 'GraphView',
+  props: {
+    primary: {
+      type: Object,
+      required: true,
     },
-    handleOk(e) {
-      this.visible = false
+    fields: {
+      type: Array,
+      required: true,
+    },
+    view: {
+      type: Object,
+      required: true,
+    },
+    table: {
+      type: Object,
+      required: true,
+    },
+    database: {
+      type: Object,
+      required: true,
     },
   },
 }
 </script>
-
-<style>
-body {
-  margin: 0px;
-}
-#app {
-  width: 100vw;
-  height: 100vh;
-}
-.content {
-  display: flex;
-  height: 100%;
-}
-.sidebar {
-  position: relative;
-  width: 290px;
-  height: 100%;
-  border-right: 1px solid rgba(0, 0, 0, 0.08);
-}
-.panel {
-  height: 100%;
-}
-.toolbar {
-  display: flex;
-  align-items: center;
-  height: 38px;
-  background-color: #f7f9fb;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-}
-</style>
